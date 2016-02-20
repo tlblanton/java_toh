@@ -1,4 +1,4 @@
-package co.tylerblanton;
+package co.tylerblanton.java_toh;
 
 import java.util.*;
 
@@ -12,10 +12,6 @@ public class Main
         Scanner s = new Scanner(System.in);
         System.out.println("How many items are on tower A?");
         int stackStartSize = s.nextInt();
-
-//	    Stack<Integer> A = new Stack<Integer>();
-//        Stack<Integer> B = new Stack<Integer>();
-//        Stack<Integer> C = new Stack<Integer>();
 
         for(int i = stackStartSize; i > 0; --i)
         {
