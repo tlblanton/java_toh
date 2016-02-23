@@ -4,9 +4,15 @@ import java.util.*;
 
 public class Main
 {
-   static  Stack<Integer> A = new Stack<Integer>();
-    static Stack<Integer> B = new Stack<Integer>();
-    static Stack<Integer> C = new Stack<Integer>();
+    static int moves = 0;
+
+    static customStack A = new customStack("A");
+    static customStack B = new customStack("B");
+    static customStack C = new customStack("C");
+
+//    static  Stack<Integer> A = new Stack<>();
+//    static Stack<Integer> B = new Stack<>();
+//    static Stack<Integer> C = new Stack<>();
     public static void main(String[] args)
     {
         Scanner s = new Scanner(System.in);
@@ -15,41 +21,45 @@ public class Main
 
         for(int i = stackStartSize; i > 0; --i)
         {
-            A.push(new Integer(i));
+            A.stack.push(i);
         }
 
-        displayTowers(A, B, C);
-        hanoi(stackStartSize, A, B, C);
+        displayTowers(A.stack, B.stack, C.stack);
+        moveDisks(stackStartSize, A, B, C);
 
+        System.out.println("Number of Moves: " + moves);
     }
 
-    static void hanoi(int rings, Stack<Integer> start, Stack<Integer> aux, Stack<Integer> end)
+    static void moveDisks(int rings, customStack start, customStack aux, customStack end)
     {
-        //displayTowers(A, B, C);
         if(rings == 1)
         {
-            end.push(start.pop());
-            displayTowers(A, B, C);
+            end.stack.push(start.stack.pop());
+            System.out.println(start.name + " -> " + end.name);
+            moves++;
+            displayTowers(A.stack, B.stack, C.stack);
         }
         else
         {
-            hanoi(rings-1, start, end, aux);
-            //displayTowers(A, B, C);
-            end.push(start.pop());        //this fails because end eventually has size 0
-            displayTowers(A, B, C);
-            hanoi(rings-1, aux, start, end);
+            moveDisks(rings-1, start, end, aux);
+            end.stack.push(start.stack.pop());
+            System.out.println(start.name + " -> " + end.name);
+            moves++;
+            displayTowers(A.stack, B.stack, C.stack);
+            moveDisks(rings-1, aux, start, end);
         }
     }
 
     static void displayTowers(Stack<Integer> A, Stack<Integer> B, Stack<Integer> C)
     {
-        Stack<Integer> aCopy = new Stack<Integer>();
+        System.out.println("** Move Number: " + moves);
+        Stack<Integer> aCopy = new Stack<>();   //replace Integer if things go wrong
         aCopy.addAll(A);
 
-        Stack<Integer> bCopy = new Stack<Integer>();
+        Stack<Integer> bCopy = new Stack<>();
         bCopy.addAll(B);
 
-        Stack<Integer> cCopy = new Stack<Integer>();
+        Stack<Integer> cCopy = new Stack<>();
         cCopy.addAll(C);
 
         System.out.print("[");
@@ -88,7 +98,6 @@ public class Main
             System.out.print("]\n");
         }
 
-
         System.out.print("[");
         int Csize = C.size();
         for(int i = 0; i < Csize; ++i)
@@ -108,4 +117,17 @@ public class Main
         }
         System.out.println("-------------------------------------------------");
     }
+    static class customStack
+    {
+        Stack<Integer> stack;
+        String name;
+        customStack(String nName)
+        {
+            name = nName;
+            stack = new Stack<>();
+        }
+    }
 }
+
+
+
