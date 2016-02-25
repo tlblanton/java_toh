@@ -1,11 +1,8 @@
-package co.tylerblanton.java_toh;
-
 import java.util.*;
 
 public class Main
 {
     static int moves = 0;
-
     static customStack A = new customStack("A");
     static customStack B = new customStack("B");
     static customStack C = new customStack("C");
