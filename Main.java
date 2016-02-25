@@ -10,16 +10,13 @@ public class Main
     static customStack B = new customStack("B");
     static customStack C = new customStack("C");
 
-//    static  Stack<Integer> A = new Stack<>();
-//    static Stack<Integer> B = new Stack<>();
-//    static Stack<Integer> C = new Stack<>();
     public static void main(String[] args)
     {
         Scanner s = new Scanner(System.in);
         System.out.println("How many items are on tower A?");
         int stackStartSize = s.nextInt();
 
-        for(int i = stackStartSize; i > 0; --i)
+        for(int i = stackStartSize-1; i > -1; --i)
         {
             A.stack.push(i);
         }
@@ -128,6 +125,3 @@ public class Main
         }
     }
 }
-
-
-
